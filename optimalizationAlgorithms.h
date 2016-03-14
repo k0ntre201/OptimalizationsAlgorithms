@@ -18,6 +18,7 @@ void simulatedAnneaning(double& x,double& y, double& fx, F func)
 	std::uniform_real_distribution<double> dist3(0.0, 1.0);
 	x = dist1(engine);
 	y = dist1(engine);
+
 	fx = func(x, y);
 	while (T0>Tf)
 	{
