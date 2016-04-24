@@ -26,6 +26,7 @@ private:
 	std::uniform_real_distribution<float> dx, dy;
 };
 
+
 class TwoIntegerDimensionUniformRandom
 {
 public:
@@ -44,6 +45,7 @@ public:
 private:
 	std::uniform_int_distribution<int> dx, dy;
 };
+
 
 namespace MyRandom
 {
@@ -345,7 +347,140 @@ namespace MyRandom
 	private:
 		T ni, lambda;
 	};
-}
+/*
 
+	template<typename T>
+	class box_muller_transform
+	{
+	public:
+		box_muller_transform(T m = 1, T o = 0)
+		{
+			mean = m;
+			offsed = o;
+		}
+
+		template<typename Engine>
+		T operator()(Engine& engine)
+		{
+			MyRandom::uniform_real_distribution<T> dist(0.0, 1.0);
+
+			T u1 = dist(engine);
+			T u2 = dist(engine);
+
+
+			T z0 = std::sqrt(-2 * std::log(u1))*std::cos(2 * 3.1415926535897*u2);//  std::sqrt(-2 * std:log(u1))*std::cos(2 * 3.1415926535897*u2);
+																				 //T z1 = std::sqrt(-2 * std:log(u1))*std::sin(2 * 3.1415926535897*u2);
+
+			return z0*mean + offsed;
+		}
+
+		virtual ~box_muller_transform() {}
+	private:
+		T mean, offsed;
+	};
+
+	template<typename T>
+	class mashagilla_polar_method
+	{
+	public:
+		mashagilla_polar_method(T mean = 0, T sigma = 1)
+		{
+			this->mean = mean;
+			this->sigma = sigma;
+		}
+
+		template<typename Engine>
+		T operator()(Engine& engine)
+		{
+			MyRandom::uniform_real_distribution<T> dist(0.0, 1.0);
+			T u, v, s;
+			while (true)
+			{
+				u = dist(engine);
+				v = dist(engine);
+				if ((s = u*u + v*v) < 1)
+					break;
+			}
+			return (u*std::sqrt(-std::log(s) / s))*sigma + mean;
+		}
+
+		virtual ~mashagilla_polar_method() {}
+	private:
+		T mean, sigma;
+	};
+
+	template<typename T>
+	class inverse_gaussian_distribution
+	{
+	public:
+		inverse_gaussian_distribution(T mean = 1, T shapness = 1)
+		{
+			ni = mean;
+			lambda = shapness;
+		}
+		template<typename Engine>
+		T operator()(Engine& engine)
+		{
+			MyRandom::uniform_real_distribution<T> dist(0.0, 1.0);
+			MyRandom::mashagilla_polar_method<T> N;
+			T u = N(engine);
+			T y = u*u;
+
+			T x = ni + ((ni*ni*y) - ni*(std::sqrt(4 * ni*lambda*y + ni*ni*y*y))) / (2 * lambda);
+
+			T z = dist(engine);
+
+			if (z <= (ni / (ni + x)))
+				return x;
+			else
+				return (ni*ni) / x;
+		}
+
+		virtual ~inverse_gaussian_distribution() {}
+
+	private:
+		T ni, lambda;
+
+	};
+
+	template<typename T>
+	class levy_distribution
+	{
+	public:
+		static_assert(std::is_fundamental<T>::value, "Wrong intial parametrs in template!\n");
+
+		levy_distribution(T mean = 1, T shapness = 1)
+		{
+			ni = mean;
+			lambda = shapness;
+		}
+		template<typename Engine>
+		T operator()(Engine& engine)
+		{
+			MyRandom::uniform_real_distribution<T> dist(-0.5, 0.5);
+			MyRandom::mashagilla_polar_method<T> N;
+			T u = N(engine);
+			T y = u*u;
+
+			T x = ni + ((ni*ni*y) - ni*(std::sqrt(4 * ni*lambda*y + ni*ni*y*y))) / (2 * lambda);
+
+			T z = dist(engine);
+
+			T ld;
+			if (z <= (ni / (ni + x)))
+				ld = x;
+			else
+				ld = (ni*ni) / x;
+
+			return lambda / (ld*ld) + ni;
+		}
+
+		virtual ~levy_distribution() {}
+
+	private:
+		T ni, lambda;
+	};
+}
+*/
 
 #endif // !MY_RANDOM_H
