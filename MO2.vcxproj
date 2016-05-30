@@ -92,6 +92,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -142,12 +143,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Flocking.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ParticleSwarmOptimalization.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BatAlgorithm.h" />
+    <ClInclude Include="BlackHolesAlgorithm.h" />
+    <ClInclude Include="Boid.h" />
+    <ClInclude Include="CauchyRandomNumbers.h" />
+    <ClInclude Include="ChargedSystemSearch.h" />
+    <ClInclude Include="CuckooSearch.h" />
+    <ClInclude Include="DifferentialEvolution.h" />
+    <ClInclude Include="DrawFourGenerators.h" />
+    <ClInclude Include="DrawGraph.h" />
+    <ClInclude Include="DrawingClass.h" />
+    <ClInclude Include="FireflyAlgorithm.h" />
+    <ClInclude Include="Flocking.h" />
     <ClInclude Include="functions.h" />
+    <ClInclude Include="GaussRandomNumbers.h" />
+    <ClInclude Include="GenerateFucntionTexture.h" />
+    <ClInclude Include="GlowwormSwarmAlgorith.h" />
+    <ClInclude Include="GrawitationalSearchAlgorithm.h" />
+    <ClInclude Include="IntelligentWaterDrops.h" />
+    <ClInclude Include="LevyRandomNumbers.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="MyRandom.h" />
     <ClInclude Include="optimalizationAlgorithms.h" />
+    <ClInclude Include="ParticleSwarmOptimalization.h" />
+    <ClInclude Include="PSO.h" />
+    <ClInclude Include="RiverFormationDynamic.h" />
+    <ClInclude Include="SimulatedAneaning.h" />
+    <ClInclude Include="UniformRandomNumbers.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
